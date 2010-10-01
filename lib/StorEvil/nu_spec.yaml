@@ -1,0 +1,87 @@
+--- !ruby/object:Gem::Specification 
+name: storevil
+version: !ruby/object:Gem::Version 
+  hash: 40201585
+  prerelease: false
+  segments: 
+  - 0
+  - 6
+  - 0
+  - 0
+  - 20100823
+  version: 0.6.0.0.20100823
+platform: ruby
+authors: 
+- David M. Foley
+autorequire: 
+bindir: bin
+cert_chain: []
+
+date: 2010-08-23 02:00:00 -05:00
+default_executable: 
+dependencies: 
+- !ruby/object:Gem::Dependency 
+  name: sparkviewengine
+  prerelease: false
+  requirement: &id001 !ruby/object:Gem::Requirement 
+    none: false
+    requirements: 
+    - - ">"
+      - !ruby/object:Gem::Version 
+        hash: 95
+        segments: 
+        - 1
+        - 0
+        - 0
+        - 0
+        version: 1.0.0.0
+  type: :runtime
+  version_requirements: *id001
+description: StorEvil is a BDD tool for .NET that you can use to write specifications in English, and then execute those specifications. It parses the text using conventions and removes the need to write regular expressions in most cases. It supports .NET languages such as C#.
+email: storevil@googlegroups.com
+executables: []
+
+extensions: []
+
+extra_rdoc_files: []
+
+files: 
+- lib/Funq.DLL
+- lib/StorEvil.Core.DLL
+- lib/StorEvil.exe
+has_rdoc: true
+homepage: http://github.com/davidmfoley/storevil
+licenses: []
+
+post_install_message: 
+rdoc_options: []
+
+require_paths: 
+- lib
+required_ruby_version: !ruby/object:Gem::Requirement 
+  none: false
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      hash: 3
+      segments: 
+      - 0
+      version: "0"
+required_rubygems_version: !ruby/object:Gem::Requirement 
+  none: false
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      hash: 3
+      segments: 
+      - 0
+      version: "0"
+requirements: []
+
+rubyforge_project: storevil
+rubygems_version: 1.3.7
+signing_key: 
+specification_version: 3
+summary: StorEvil is a natural language BDD framework for .NET.
+test_files: []
+
