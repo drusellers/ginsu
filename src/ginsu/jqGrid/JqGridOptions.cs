@@ -10,28 +10,12 @@
 // under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR 
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the 
 // specific language governing permissions and limitations under the License.
-namespace ginsu
+namespace ginsu.jqGrid
 {
-    using System;
     using System.Collections.Generic;
 
-    public class ReportDefinition
+    public class JqGridOptions
     {
-        public ReportDefinition()
-        {
-            Columns = new List<Column>();
-        }
-
-        public IList<Column> Columns { get; private set; }
-        public Type ReportDataType { get; set; }
-
-
-        //factory
-        public static ReportDefinition New<REPORT>(Action<ReportConfiguration<REPORT>> cfg)
-        {
-            var def = new ReportConfiguration<REPORT>();
-            cfg(def);
-            return def.BuildDef();
-        }
+        public IList<JqColumnModel> Columns { get; set; }
     }
 }

@@ -10,28 +10,21 @@
 // under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR 
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the 
 // specific language governing permissions and limitations under the License.
-namespace ginsu
+namespace ginsu.jqGrid
 {
-    using System;
-    using System.Collections.Generic;
+    using Magnum.Extensions;
 
-    public class ReportDefinition
+    public class JqColumnModel
     {
-        public ReportDefinition()
+        public string DisplayName { get; set; }
+        public string Name { get; set; }
+        public string Index { get; set; }
+        public int Width { get; set; }
+        public string SortType { get; set; }
+
+        public override string ToString()
         {
-            Columns = new List<Column>();
-        }
-
-        public IList<Column> Columns { get; private set; }
-        public Type ReportDataType { get; set; }
-
-
-        //factory
-        public static ReportDefinition New<REPORT>(Action<ReportConfiguration<REPORT>> cfg)
-        {
-            var def = new ReportConfiguration<REPORT>();
-            cfg(def);
-            return def.BuildDef();
+            return "{{ name: '{0}', index: '{1}', width: {2}, sorttype: '{3}' }}".FormatWith(Name, Index, Width, SortType);
         }
     }
 }

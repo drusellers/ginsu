@@ -10,28 +10,25 @@
 // under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR 
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the 
 // specific language governing permissions and limitations under the License.
-namespace ginsu
+namespace ginsu.web.Controllers
 {
-    using System;
     using System.Collections.Generic;
+    using System.Web.Mvc;
+    using jqGrid;
 
-    public class ReportDefinition
+    public class ReportController :
+        Controller
     {
-        public ReportDefinition()
+        public ActionResult Index()
         {
-            Columns = new List<Column>();
+            var o = new JqGridOptions();
+            o.Columns = new List<JqColumnModel>()
+                { //string, date, int
+                new JqColumnModel(){DisplayName = "A",Index="id",Name="id",SortType = "string", Width = 100},
+                new JqColumnModel(){DisplayName = "B",Index="invdate",Name="invdate",SortType = "date",Width = 100},
+                };
+            return View(o);
         }
 
-        public IList<Column> Columns { get; private set; }
-        public Type ReportDataType { get; set; }
-
-
-        //factory
-        public static ReportDefinition New<REPORT>(Action<ReportConfiguration<REPORT>> cfg)
-        {
-            var def = new ReportConfiguration<REPORT>();
-            cfg(def);
-            return def.BuildDef();
-        }
     }
 }
