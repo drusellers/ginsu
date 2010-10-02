@@ -18,7 +18,10 @@ namespace ginsu
     {
         int Order { get; set; }
         AggregationStrategy AggregationStrategy { get; set; }
+        string DisplayName { get; set; }
+        Type Type { get; set; }
         string Name { get; set; }
+        Func<object, object> Funk { get; }
     }
 
     public class Column<REPORT> :
@@ -26,10 +29,14 @@ namespace ginsu
     {
         readonly Func<REPORT, object> _func;
 
-        public Column(string name, Func<REPORT, object> func, int order, AggregationStrategy strat)
+        public Column(string name, Type type, Func<REPORT, object> func, int order, AggregationStrategy strat)
         {
             _func = func;
+            Funk = o=>_func((REPORT)o);
+
+            DisplayName = name;
             Name = name;
+            Type = type;
             AggregationStrategy = strat;
             Order = order;
         }
@@ -40,14 +47,18 @@ namespace ginsu
         }
 
         public string Name { get; set; }
-
+        public Type Type { get; set; }
+        public string DisplayName { get; set; }
         public int Order { get; set; }
+        public Func<object, object> Funk { get; set; }
 
         public AggregationStrategy AggregationStrategy { get; set; }
 
-        public void DisplayName(string displayName)
+        public void SetDisplayName(string displayName)
         {
-            Name = displayName;
+            DisplayName = displayName;
         }
+
     }
+
 }

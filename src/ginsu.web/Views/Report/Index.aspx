@@ -11,7 +11,7 @@
             jQuery("#data").jqGrid({
                 datatype: "local",
                 height: 250,
-                colNames: [<%= Model.Columns.Select(m=>m.DisplayName).Aggregate((s,r) => string.Format("'{0}', '{1}'", s, r)) %>],
+                colNames: [<%= Model.GetColumnNames() %>],
                 colModel: [
                 <% foreach(var c in Model.Columns) { %>
    		            <%= c %>,
@@ -20,10 +20,7 @@
                 caption: "Manipulating Array Data"
             });
 
-            var mydata = [
-                { id: 'bob', invdate: '2010-02-26' },
-                { id: 'apgid', invdate: '2010-02-26' },
-            ];
+            var mydata = <%= Model.GetData() %>;
 
             for (var i = 0; i <= mydata.length; i++)
                 jQuery("#data").jqGrid('addRowData', i + 1, mydata[i]);

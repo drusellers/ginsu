@@ -43,6 +43,7 @@
     <Compile Include="Column.cs" />
     <Compile Include="CountStrategy.cs" />
     <Compile Include="jqGrid\JqColumnModel.cs" />
+    <Compile Include="jqGrid\jqExtensions.cs" />
     <Compile Include="jqGrid\JqGridOptions.cs" />
     <Compile Include="QueryOptions.cs" />
     <Compile Include="ReportConfiguration.cs" />

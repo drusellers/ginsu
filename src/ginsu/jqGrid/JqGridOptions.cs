@@ -13,9 +13,45 @@
 namespace ginsu.jqGrid
 {
     using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using Magnum.Extensions;
 
     public class JqGridOptions
     {
+        public JqGridOptions()
+        {
+            Columns = new List<JqColumnModel>();
+        }
+
         public IList<JqColumnModel> Columns { get; set; }
+
+        public string GetColumnNames()
+        {
+            return Columns.Select(c => c.DisplayName).Aggregate((l, r) => "'{0}', '{1}'".FormatWith(l, r));
+        }
+
+        public IEnumerable<object> Data { get; set; }
+
+        public string GetData()
+        {
+            var sb = new StringBuilder();
+
+            sb.Append("[");
+
+            foreach (var row in Data)
+            {
+                sb.Append("{");
+                foreach (var c in Columns)
+                {
+                    sb.AppendFormat("{0} : '{1}',", c.Name.ToLower(), c.GetValue(row));
+                }
+                sb.Append("},");
+            }
+
+            sb.Append("]");
+
+            return sb.ToString();
+        }
     }
 }

@@ -51,7 +51,7 @@ namespace ginsu
                 strat = new SumStrategy();
 
 
-            var column = new Column<REPORT>(name, func.Compile(), _definition.Columns.Count, strat);
+            var column = new Column<REPORT>(name, t, func.Compile(), _definition.Columns.Count, strat);
             if (columnOptions != null) columnOptions(column);
             _definition.Columns.Add(column);
         }
@@ -59,6 +59,6 @@ namespace ginsu
 
     public interface ColumnOptions
     {
-        void DisplayName(string displayName);
+        void SetDisplayName(string displayName);
     }
 }

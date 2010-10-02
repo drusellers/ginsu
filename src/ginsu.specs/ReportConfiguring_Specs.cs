@@ -16,7 +16,7 @@ namespace ginsu.specs
             _definition = ReportDefinition.New<Report>(cfg =>
             {
                 //could be auto mapped
-                cfg.Column(r => r.Name, o=>o.DisplayName("Full Name"));
+                cfg.Column(r => r.Name, o=>o.SetDisplayName("Full Name"));
                 cfg.Column(r => r.Amount);
             });
         }
@@ -37,13 +37,13 @@ namespace ginsu.specs
         [Then]
         public void Then_column_amount_should_be_named_amount()
         {
-            _definition.Columns[1].Name.ShouldBeEqualTo("Amount"); 
+            _definition.Columns[1].DisplayName.ShouldBeEqualTo("Amount"); 
         }
 
         [Then]
         public void Then_column_name_should_be_named_Full_Name()
         {
-            _definition.Columns[0].Name.ShouldBeEqualTo("Full Name");
+            _definition.Columns[0].DisplayName.ShouldBeEqualTo("Full Name");
         }
 
         [Then]

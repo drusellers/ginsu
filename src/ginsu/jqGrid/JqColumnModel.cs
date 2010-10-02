@@ -12,6 +12,7 @@
 // specific language governing permissions and limitations under the License.
 namespace ginsu.jqGrid
 {
+    using System;
     using Magnum.Extensions;
 
     public class JqColumnModel
@@ -22,9 +23,16 @@ namespace ginsu.jqGrid
         public int Width { get; set; }
         public string SortType { get; set; }
 
+        public Func<object, object> Funk { get; set; }
+
         public override string ToString()
         {
-            return "{{ name: '{0}', index: '{1}', width: {2}, sorttype: '{3}' }}".FormatWith(Name, Index, Width, SortType);
+            return "{{ name: '{0}', index: '{1}', width: {2}, sorttype: '{3}' }}".FormatWith(Name.ToLower(), Index.ToLower(), Width, SortType);
+        }
+
+        public object GetValue(object row)
+        {
+            return Funk(row);
         }
     }
 }

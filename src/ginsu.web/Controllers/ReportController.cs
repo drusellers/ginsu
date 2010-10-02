@@ -12,6 +12,7 @@
 // specific language governing permissions and limitations under the License.
 namespace ginsu.web.Controllers
 {
+    using System;
     using System.Collections.Generic;
     using System.Web.Mvc;
     using jqGrid;
@@ -21,14 +22,43 @@ namespace ginsu.web.Controllers
     {
         public ActionResult Index()
         {
-            var o = new JqGridOptions();
-            o.Columns = new List<JqColumnModel>()
-                { //string, date, int
-                new JqColumnModel(){DisplayName = "A",Index="id",Name="id",SortType = "string", Width = 100},
-                new JqColumnModel(){DisplayName = "B",Index="invdate",Name="invdate",SortType = "date",Width = 100},
+            var data = new List<DataItem>
+                {
+                    new DataItem(){Name="Roxy", InvDate = new DateTime(1979,2,26)},
+                    new DataItem{Name="Dru", InvDate = new DateTime(2010,10,1)}
                 };
+
+            var rtp = ReportDefinition.New<DataItem>(cfg=>
+            {
+                cfg.Column(d=>d.Name);
+                cfg.Column(d=>d.InvDate, e=>e.SetDisplayName("Invoice Date"));
+            });
+
+            var o = new JqGridOptions();
+            o.Data = data;
+
+            foreach (var column in rtp.Columns)
+            {
+                o.Columns.Add(new JqColumnModel()
+                    {
+                        Name = column.Name, 
+                        DisplayName = column.DisplayName,
+                        Index = column.Name,
+                        SortType = column.Type.GetJqType(),
+                        Width = 100,
+                        Funk = column.Funk
+                    });
+            }
+
+
             return View(o);
         }
 
+    }
+
+    public class DataItem
+    {
+        public string Name { get; set; }
+        public DateTime InvDate { get; set; }
     }
 }
